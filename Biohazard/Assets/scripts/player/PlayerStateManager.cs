@@ -13,10 +13,7 @@ public class PlayerStateManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentState == "vomitting")
-        {
-            ManageVomit();
-        }
+        ManageVomit();
     }
 
     public static void Chomp()
@@ -26,6 +23,19 @@ public class PlayerStateManager : MonoBehaviour
 
     void ManageVomit()
     {
-        Debug.Log("Vomiting");
+        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        acidPoint.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+
+        acidRadiusShape.SetActive(currentState == "vomitting");
+
+        if (currentState == "vomitting")
+        {
+            
+        }
+        else
+        {
+
+        }
     }
 }
