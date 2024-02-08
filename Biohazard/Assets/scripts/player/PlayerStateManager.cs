@@ -9,6 +9,7 @@ public class PlayerStateManager : MonoBehaviour
     public static bool isChomping = false;
 
     public GameObject acidPoint;
+    public GameObject acidRadiusShape;
 
     private void Update()
     {
