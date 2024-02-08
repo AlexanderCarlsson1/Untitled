@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acidPoint: {fileID: 1861501398765580937}
+  acidRadiusShape: {fileID: 0}
 --- !u!114 &2181188971426070449
 MonoBehaviour:
   m_ObjectHideFlags: 0
