@@ -7,7 +7,7 @@ public class PlayerStateManager : MonoBehaviour
 {
     public static string currentState = "idle";
 
-    public static bool isChomping = false;
+    public static bool canAttack = false;
 
     public GameObject acidPoint;
     public GameObject acidRadiusShape;
@@ -15,6 +15,8 @@ public class PlayerStateManager : MonoBehaviour
     public GameObject acidEndPoint;
 
     public GameObject projectiles;
+
+    public GameObject chompPoint;
 
     public Sprite[] possibleAcidSprites;
 
@@ -25,7 +27,11 @@ public class PlayerStateManager : MonoBehaviour
 
     public void Chomp()
     {
-        Debug.Log("Chomp");
+        Collider2D hit = Physics2D.OverlapCircle(chompPoint.transform.position, 0.5f);
+        if (hit.GetComponentInParent<Transform>().CompareTag("Enemy"))
+        {
+            hit.GetComponentInParent<Dummy>().TakeDamage(5);
+        } 
     }
 
     public void AcidAttack()
