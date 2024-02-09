@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    string lastState = "idle";
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            PlayerStateManager.Chomp();
+            GetComponent<PlayerStateManager>().Chomp();
         }
         else if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -18,6 +19,13 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             PlayerStateManager.currentState = "idle";
+
+            if (lastState == "vomitting")
+            {
+                GetComponent<PlayerStateManager>().AcidAttack();
+            }
         }
+
+        lastState = PlayerStateManager.currentState;
     }
 }
