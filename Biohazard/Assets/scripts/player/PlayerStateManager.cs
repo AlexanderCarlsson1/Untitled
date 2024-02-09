@@ -10,15 +10,30 @@ public class PlayerStateManager : MonoBehaviour
 
     public GameObject acidPoint;
     public GameObject acidRadiusShape;
+    public GameObject acidPrefab;
+    public GameObject projectiles;
+
+    public Sprite[] possibleAcidSprites;
 
     private void Update()
     {
         ManageVomit();
     }
 
-    public static void Chomp()
+    public void Chomp()
     {
         Debug.Log("Chomp");
+    }
+
+    public void AcidAttack()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            Vector3 randomPos = Random.insideUnitCircle * 1;
+
+            GameObject newAcid = Instantiate(acidPrefab, projectiles.transform);
+            newAcid.transform.position = acidPoint.transform.position + new Vector3(randomPos.x, randomPos.y, 0);
+        }
     }
 
     void ManageVomit()
@@ -28,14 +43,5 @@ public class PlayerStateManager : MonoBehaviour
         acidPoint.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
         acidRadiusShape.SetActive(currentState == "vomitting");
-
-        if (currentState == "vomitting")
-        {
-            
-        }
-        else
-        {
-
-        }
     }
 }
