@@ -20,6 +20,8 @@ public class PlayerStateManager : MonoBehaviour
 
     public Sprite[] possibleAcidSprites;
 
+    public Rigidbody2D Rigidbody2D;
+
     private void Update()
     {
         ManageVomit();
@@ -46,6 +48,23 @@ public class PlayerStateManager : MonoBehaviour
             newAcid.transform.position = acidPoint.transform.position;
             newAcid.GetComponent<AcidController>().direction = acidEndPoint.transform.position + new Vector3(randomPos.x, randomPos.y, 0);
             newAcid.GetComponent<SpriteRenderer>().sprite = possibleAcidSprites[spriteIndex];
+        }
+    }
+
+    public void LungeAttack()
+    {
+        float LungeCharge = Time.deltaTime;
+        if (LungeCharge <= 5)
+        {
+            LungeCharge = 5;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            int Lunge = 1;
+            LungeCharge += Lunge;
+            var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            Rigidbody2D.AddForce(new Vector2(angle, Lunge),ForceMode2D.Force);
         }
     }
 

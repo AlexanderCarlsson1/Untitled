@@ -37,6 +37,12 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            GetComponent<PlayerStateManager>().LungeAttack();
+
+        }
+
         lastState = PlayerStateManager.currentState;
     }
 }
