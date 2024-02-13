@@ -6,7 +6,7 @@ public class Dummy : MonoBehaviour
 {
     public float health = 10;
 
-    void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         Debug.Log(health);

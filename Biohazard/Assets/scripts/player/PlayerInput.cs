@@ -37,6 +37,19 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
+        PlayerStateManager playerStatManager = GetComponent<PlayerStateManager>();
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            playerStatManager.IsLungeCharging = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            playerStatManager.IsLungeCharging = false;
+            playerStatManager.LungeAttack();
+        }
+
         lastState = PlayerStateManager.currentState;
     }
 }

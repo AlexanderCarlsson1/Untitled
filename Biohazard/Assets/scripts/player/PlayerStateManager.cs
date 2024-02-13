@@ -7,7 +7,7 @@ public class PlayerStateManager : MonoBehaviour
 {
     public static string currentState = "idle";
 
-    public static bool isChomping = false;
+    public static bool canAttack = false;
 
     public GameObject acidPoint;
     public GameObject acidRadiusShape;
@@ -16,16 +16,31 @@ public class PlayerStateManager : MonoBehaviour
 
     public GameObject projectiles;
 
+    public GameObject chompPoint;
+
     public Sprite[] possibleAcidSprites;
+
+    public Rigidbody2D Rigidbody2D;
+
+    public float LungeCharge = 0;
+    public bool IsLungeCharging = false;
+
+    bool LungeTrigger = false;
+    Vector3 LungeDir;
 
     private void Update()
     {
         ManageVomit();
+        ManageLunge();
     }
 
     public void Chomp()
     {
-        Debug.Log("Chomp");
+        Collider2D hit = Physics2D.OverlapCircle(chompPoint.transform.position, 0.5f);
+        if (hit.GetComponentInParent<Transform>().CompareTag("Enemy"))
+        {
+            hit.GetComponentInParent<Dummy>().TakeDamage(5);
+        } 
     }
 
     public void AcidAttack()
@@ -41,6 +56,28 @@ public class PlayerStateManager : MonoBehaviour
             newAcid.GetComponent<AcidController>().direction = acidEndPoint.transform.position + new Vector3(randomPos.x, randomPos.y, 0);
             newAcid.GetComponent<SpriteRenderer>().sprite = possibleAcidSprites[spriteIndex];
         }
+    }
+
+    void ManageLunge()
+    {
+        if (IsLungeCharging && LungeCharge <= 50)
+        {
+            LungeCharge += 100 * Time.deltaTime;
+        }
+        else if (!IsLungeCharging)
+        {
+            LungeCharge = 0;
+        }
+    }
+
+    public void LungeAttack()
+    {
+        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        dir.Normalize();
+
+        LungeDir = dir;
+
+        LungeTrigger = true;
     }
 
     void ManageVomit()
