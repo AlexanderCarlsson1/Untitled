@@ -22,9 +22,16 @@ public class PlayerStateManager : MonoBehaviour
 
     public Rigidbody2D Rigidbody2D;
 
+    public float LungeCharge = 0;
+    public bool IsLungeCharging = false;
+
+    bool LungeTrigger = false;
+    Vector3 LungeDir;
+
     private void Update()
     {
         ManageVomit();
+        ManageLunge();
     }
 
     public void Chomp()
@@ -51,21 +58,26 @@ public class PlayerStateManager : MonoBehaviour
         }
     }
 
+    void ManageLunge()
+    {
+        if (IsLungeCharging && LungeCharge <= 50)
+        {
+            LungeCharge += 100 * Time.deltaTime;
+        }
+        else if (!IsLungeCharging)
+        {
+            LungeCharge = 0;
+        }
+    }
+
     public void LungeAttack()
     {
-        float LungeCharge = Time.deltaTime;
-        if (LungeCharge <= 5)
-        {
-            LungeCharge = 5;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            int Lunge = 1;
-            LungeCharge += Lunge;
-            var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            Rigidbody2D.AddForce(new Vector2(angle, Lunge),ForceMode2D.Force);
-        }
+        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        dir.Normalize();
+
+        LungeDir = dir;
+
+        LungeTrigger = true;
     }
 
     void ManageVomit()

@@ -251,6 +251,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d875674c3c54b454da8192968acc9893, type: 3}
   - {fileID: 21300000, guid: 3ab7e4fd265ea0e439dde96a265a0f07, type: 3}
   - {fileID: 21300000, guid: 0534697f6ab67634ab7b362702082820, type: 3}
+  Rigidbody2D: {fileID: 1013289665760486993}
+  LungeCharge: 0
+  IsLungeCharging: 0
 --- !u!114 &2181188971426070449
 MonoBehaviour:
   m_ObjectHideFlags: 0
