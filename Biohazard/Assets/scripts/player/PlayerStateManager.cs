@@ -24,16 +24,22 @@ public class PlayerStateManager : MonoBehaviour
     public GameObject playerSprite;
 
     public Sprite[] possibleAcidSprites;
-
     Vector3 acidPuddleSpawnPoint;
-
     GameObject acidPuddle;
+    public Rigidbody2D Rigidbody2D;
 
     float lastChomp;
+
+    public float LungeCharge = 0;
+    public bool IsLungeCharging = false;
+
+    bool LungeTrigger = false;
+    Vector3 LungeDir;
 
     private void Update()
     {
         ManageAcid();
+        ManageLunge();
     }
 
     public void Chomp()
@@ -74,6 +80,28 @@ public class PlayerStateManager : MonoBehaviour
             newAcid.GetComponent<AcidController>().direction = acidEndPoint.transform.position + new Vector3(randomPos.x, randomPos.y, 0);
             newAcid.GetComponent<SpriteRenderer>().sprite = possibleAcidSprites[spriteIndex];
         }
+    }
+
+    void ManageLunge()
+    {
+        if (IsLungeCharging && LungeCharge <= 50)
+        {
+            LungeCharge += 100 * Time.deltaTime;
+        }
+        else if (!IsLungeCharging)
+        {
+            LungeCharge = 0;
+        }
+    }
+
+    public void LungeAttack()
+    {
+        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        dir.Normalize();
+
+        LungeDir = dir;
+
+        LungeTrigger = true;
     }
 
     void ManageAcid()
