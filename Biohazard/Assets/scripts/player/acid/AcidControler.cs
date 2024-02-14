@@ -5,6 +5,8 @@ using static UnityEngine.Rendering.DebugUI.Table;
 
 public class AcidController : MonoBehaviour
 {
+    public PlayerStateManager stateManager;
+
     public new Rigidbody2D rigidbody;
 
     public Vector3 direction;
@@ -37,6 +39,18 @@ public class AcidController : MonoBehaviour
         if (spriteRenderer.color.a <= 0)
         {
             Destroy(gameObject);
+        }
+        else if (spriteRenderer.color.a <= 0.5f)
+        {
+            stateManager.SpawnAcidPuddle();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Dummy>().TakeDamage(5);
         }
     }
 }

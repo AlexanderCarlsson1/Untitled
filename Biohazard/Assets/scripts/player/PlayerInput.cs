@@ -9,9 +9,11 @@ public class PlayerInput : MonoBehaviour
     private float lastAcidUse;
     bool canUseAcid = true;
 
+    public float acidCooldown;
+
     void Update()
     {
-        if (Time.time > lastAcidUse + 8)
+        if (Time.time > lastAcidUse + acidCooldown)
         {
             canUseAcid = true;
         }
