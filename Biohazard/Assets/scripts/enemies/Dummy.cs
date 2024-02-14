@@ -14,6 +14,7 @@ public class Dummy : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Dummy died");
+            Destroy(gameObject);
         }
     }
 }

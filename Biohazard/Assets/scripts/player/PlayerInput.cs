@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour
     private float lastAcidUse;
     bool canUseAcid = true;
 
+
     public float dissabledtimer;
 
     private void Start()
@@ -18,9 +19,12 @@ public class PlayerInput : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
     }
 
+    public float acidCooldown;
+
+
     void Update()
     {
-        if (Time.time > lastAcidUse + 8)
+        if (Time.time > lastAcidUse + acidCooldown)
         {
             canUseAcid = true;
         }
