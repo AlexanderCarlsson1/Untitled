@@ -60,23 +60,25 @@ public class PlayerStateManager : MonoBehaviour
 
     void ManageLunge()
     {
-        if (IsLungeCharging && LungeCharge <= 50)
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            LungeCharge += 100 * Time.deltaTime;
+            LungeCharge += Time.deltaTime * 5;
+            PlayerMovement.moveSpeed = 0;
+        }
+        if (IsLungeCharging && LungeCharge >= 15)
+        {
+            LungeCharge = 20;
         }
         else if (!IsLungeCharging)
         {
             LungeCharge = 0;
         }
+
     }
 
     public void LungeAttack()
     {
-        var dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        dir.Normalize();
-
-        LungeDir = dir;
-
+        Rigidbody2D.velocity = transform.right * LungeCharge;
         LungeTrigger = true;
     }
 
