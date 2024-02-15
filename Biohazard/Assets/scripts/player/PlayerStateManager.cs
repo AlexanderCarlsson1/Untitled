@@ -33,7 +33,6 @@ public class PlayerStateManager : MonoBehaviour
     public float LungeCharge = 0;
     public bool IsLungeCharging = false;
 
-    bool LungeTrigger = false;
     Vector3 LungeDir;
 
     private void Update()
@@ -103,7 +102,6 @@ public class PlayerStateManager : MonoBehaviour
     public void LungeAttack()
     {
         Rigidbody2D.velocity = transform.right * LungeCharge;
-        LungeTrigger = true;
     }
 
     void ManageAcid()
