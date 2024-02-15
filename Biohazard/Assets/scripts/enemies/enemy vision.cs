@@ -12,10 +12,22 @@ public class enemyvision : MonoBehaviour
     {
         
     }
-
+    private static Transform currentTarget;
     // Update is called once per frame
     void Update()
     {
+        if (currentTarget)
+        {
+
+        }
+        if (search == true && spotted == false)
+        {
+            searchTimer += Time.deltaTime;
+        }
+        if (searchTimer >= 6)
+        {
+            search = false;
+        }
         if (search == true && spotted == false)
         {
             Search();
@@ -48,5 +60,6 @@ public class enemyvision : MonoBehaviour
     void Search()
     {
         Debug.Log("searching");
+        
     }
 }
