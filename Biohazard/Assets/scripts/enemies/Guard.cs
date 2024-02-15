@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Guard : MonoBehaviour
 {
-    public bool spotted = false;
-    public bool searching = false;
+    [SerializeField]
+    private GameObject target;
 
-    float searchTimer = 0;
+    private static Transform currentTarget;
 
     private void Update()
     {
@@ -51,5 +51,46 @@ public class Guard : MonoBehaviour
             spotted = false;
             GetComponent<AIDestinationSetter>().target = null;
         }
+        if (search == true && spotted == false)
+        {
+            searchTimer += Time.deltaTime;
+        }
+        if (searchTimer >= 6)
+        {
+            search = false;
+        }
+        if (search == true && spotted == false)
+        {
+            Search();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (GameObject.FindWithTag("Player"))
+        {
+            spotted = true;
+            search = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Vector2 playerLastSeen = GameObject.FindWithTag(("Player")).GetComponent<Transform>().position;
+
+        if (GameObject.FindWithTag("Player"))
+        {
+            spotted = false;
+
+        }
+
+
+
+    }
+
+    void Search()
+    {
+        Debug.Log("searching");
+        
     }
 }
