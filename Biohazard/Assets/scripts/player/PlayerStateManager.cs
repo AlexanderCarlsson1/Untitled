@@ -85,7 +85,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            LungeCharge += Time.deltaTime * 5;
+            LungeCharge += Time.deltaTime * 7.5f;
             PlayerMovement.moveSpeed = 0;
         }
         if (IsLungeCharging && LungeCharge >= 15)
