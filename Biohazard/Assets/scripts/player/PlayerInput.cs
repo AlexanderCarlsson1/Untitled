@@ -56,7 +56,7 @@ public class PlayerInput : MonoBehaviour
         {
             playerStatManager.IsLungeCharging = true;
 
-            dissabledtimer += Time.deltaTime * 5;
+            dissabledtimer += Time.deltaTime * 7.5f;
             if (dissabledtimer >= 20)
             {
                 dissabledtimer = 20;
