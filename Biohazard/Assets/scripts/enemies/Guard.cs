@@ -8,33 +8,49 @@ public class Guard : MonoBehaviour
     [SerializeField]
     private GameObject target;
 
+    AIDestinationSetter destionationSetter;
+
     private static Transform currentTarget;
+
+    private bool searching;
+
+    private float searchTimer;
+
+    private void Start()
+    {
+        destionationSetter = GetComponent<AIDestinationSetter>();
+    }
 
     private void Update()
     {
         ManageSearch();
+
+        Transform target = destionationSetter.target;
+
+        if (target)
+        {
+            Vector3 look = transform.InverseTransformPoint(target.position);
+            float angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg;
+
+            transform.Rotate(0, 0, angle);
+        }
     }
 
     void ManageSearch()
     {
-        if (searching == true && spotted == false)
+        if (searching == false)
         {
+            destionationSetter.target = null;
             searchTimer += Time.deltaTime;
         }
         if (searchTimer >= 6)
         {
-            searching = false;
-        }
-        if (searching == true && spotted == false)
-        {
-            Debug.Log("searching");
+            // go back to original location?
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        AIDestinationSetter destionationSetter = GetComponent<AIDestinationSetter>();
-
         if (collision.CompareTag("Player"))
         {
             destionationSetter.target = collision.transform;
@@ -44,53 +60,9 @@ public class Guard : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Vector2 playerLastSeen = GameObject.FindWithTag(("Player")).GetComponent<Transform>().position;
-
-        if (GameObject.FindWithTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            spotted = false;
-            GetComponent<AIDestinationSetter>().target = null;
+            searching = false;
         }
-        if (search == true && spotted == false)
-        {
-            searchTimer += Time.deltaTime;
-        }
-        if (searchTimer >= 6)
-        {
-            search = false;
-        }
-        if (search == true && spotted == false)
-        {
-            Search();
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (GameObject.FindWithTag("Player"))
-        {
-            spotted = true;
-            search = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        Vector2 playerLastSeen = GameObject.FindWithTag(("Player")).GetComponent<Transform>().position;
-
-        if (GameObject.FindWithTag("Player"))
-        {
-            spotted = false;
-
-        }
-
-
-
-    }
-
-    void Search()
-    {
-        Debug.Log("searching");
-        
     }
 }
