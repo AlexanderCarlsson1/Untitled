@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public GameObject player;
-    public float moveSpeed;
+    public static float moveSpeed = 5;
     public new Rigidbody2D rigidbody;
     private Vector2 moveInput;
 
@@ -21,6 +21,6 @@ public class PlayerMovement : MonoBehaviour
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Quaternion rot = Quaternion.Euler(0f, 0f, angle);
 
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, 10 * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, 5 * Time.deltaTime);
     }
 }
