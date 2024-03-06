@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEditor.PlayerSettings;
 
 public class PlayerStateManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerStateManager : MonoBehaviour
     public GameObject projectiles;
 
     public GameObject chompPoint;
+    public GameObject LungePoint;
 
     public GameObject playerSprite;
 
@@ -52,15 +54,25 @@ public class PlayerStateManager : MonoBehaviour
 
         if (Time.time > lastChomp + chompAttackCooldown)
         {
-            playerSprite.GetComponent<Animator>().Play("chomp", -1, 0f);
+            // anim goes here
+            //playerSprite.GetComponent<Animator>().Play("chomp", -1, 0f);
 
-            Collider2D hit = Physics2D.OverlapCircle(chompPoint.transform.position, 0.9f);
-            if (hit.GetComponentInParent<Transform>().CompareTag("Enemy"))
-            {
-                hit.GetComponentInParent<Dummy>().TakeDamage(5);
-            }
+            HitPoint(chompPoint.transform.position, 1.2f, 10);
 
             lastChomp = Time.time;
+        }
+    }
+
+    public void HitPoint(Vector2 pos, float radius, float damage)
+    {
+        Collider2D hit = Physics2D.OverlapCircle(chompPoint.transform.position, radius);
+
+        Debug.Log("hit something");
+
+        if (hit.CompareTag("Enemy"))
+        {
+            hit.GetComponentInParent<Dummy>().TakeDamage(damage);
+            Debug.Log("hit enemy");
         }
     }
 
@@ -103,6 +115,7 @@ public class PlayerStateManager : MonoBehaviour
 
     public void LungeAttack()
     {
+        HitPoint(LungePoint.transform.position, 4, 10);
         Rigidbody2D.velocity = transform.right * LungeCharge;
     }
 
