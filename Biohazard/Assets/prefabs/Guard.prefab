@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 7768129321787448787}
   - component: {fileID: 8836127738610104485}
   - component: {fileID: 4023278737437077438}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Guard
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,6 +138,9 @@ MonoBehaviour:
   projectilesContainer: {fileID: 0}
   bullet: {fileID: 3396041620487117228, guid: 4f9202bd6a6391044bd05713b8fdc600, type: 3}
   shootCooldown: 1
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!58 &8836127738610104485
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -238,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3068624636775284458}
   - component: {fileID: 5229348910401885179}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

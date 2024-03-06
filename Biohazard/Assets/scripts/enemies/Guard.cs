@@ -15,6 +15,8 @@ public class Guard : MonoBehaviour
 
     public float shootCooldown = 1;
 
+    public LayerMask wallMask;
+
     private static Transform currentTarget;
 
     private bool searching;
@@ -36,6 +38,8 @@ public class Guard : MonoBehaviour
 
         if (target)
         {
+            CheckSight(target);
+
             Vector3 look = transform.InverseTransformPoint(target.position);
             float angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg;
 
@@ -65,6 +69,19 @@ public class Guard : MonoBehaviour
         if (searchTimer >= 6)
         {
             // go back to original location?
+        }
+    }
+
+    void CheckSight(Transform trans)
+    {
+        RaycastHit2D result = Physics2D.Raycast(transform.position, trans.position, 100f, wallMask.value);
+
+        if (result)
+        {
+            destionationSetter.target = null;
+            searching = false;
+
+            return;
         }
     }
 
