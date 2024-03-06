@@ -10,11 +10,17 @@ public class Guard : MonoBehaviour
 
     AIDestinationSetter destionationSetter;
 
+    public GameObject projectilesContainer;
+    public GameObject bullet;
+
+    public float shootCooldown = 1;
+
     private static Transform currentTarget;
 
     private bool searching;
 
     private float searchTimer;
+    float lastShot;
 
     private void Start()
     {
@@ -23,6 +29,7 @@ public class Guard : MonoBehaviour
 
     private void Update()
     {
+        ManageShooting();
         ManageSearch();
 
         Transform target = destionationSetter.target;
@@ -33,6 +40,18 @@ public class Guard : MonoBehaviour
             float angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg;
 
             transform.Rotate(0, 0, angle);
+        }
+    }
+
+    void ManageShooting()
+    {
+        if (Time.time > lastShot + shootCooldown && destionationSetter.target)
+        {
+            GameObject newBullet = Instantiate(bullet, projectilesContainer.transform);
+            newBullet.transform.position = transform.position;
+            newBullet.transform.rotation = transform.rotation;
+
+            lastShot = Time.time;
         }
     }
 

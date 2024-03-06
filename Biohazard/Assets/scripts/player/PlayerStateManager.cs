@@ -9,6 +9,8 @@ public class PlayerStateManager : MonoBehaviour
 
     public static bool canAttack = false;
 
+    public float shootCooldown = 1;
+
     public float chompAttackCooldown;
 
     public GameObject acidPoint;

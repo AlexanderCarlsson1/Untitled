@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  target: {fileID: 0}
+  target: {fileID: 400179092086010176, guid: 4f9202bd6a6391044bd05713b8fdc600, type: 3}
 --- !u!114 &7768129321787448787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +135,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  projectilesContainer: {fileID: 0}
+  bullet: {fileID: 3396041620487117228, guid: 4f9202bd6a6391044bd05713b8fdc600, type: 3}
+  shootCooldown: 1
 --- !u!58 &8836127738610104485
 CircleCollider2D:
   m_ObjectHideFlags: 0
