@@ -9,6 +9,8 @@ public class AcidController : MonoBehaviour
 
     public new Rigidbody2D rigidbody;
 
+    public GameObject acidPoint;
+
     public Vector3 direction;
 
     Quaternion random_rotation;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     PlayerMovement movement;
+    PlayerStateManager stateManager;
 
     string lastState = "idle";
 
@@ -12,10 +13,15 @@ public class PlayerInput : MonoBehaviour
     bool canUseAcid = true;
 
 
-    public float dissabledtimer;
+    public static float dissabledtimer;
 
     private void Start()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null) 
+        {
+            stateManager = player.GetComponent<PlayerStateManager>();
+        }
         movement = GetComponent<PlayerMovement>();
     }
 
@@ -70,6 +76,8 @@ public class PlayerInput : MonoBehaviour
             StartCoroutine("PlayerLungeAttack", dissabledtimer/10);
             playerStatManager.IsLungeCharging = false;
             playerStatManager.LungeAttack();
+            
+            
 
         }
 
@@ -82,5 +90,6 @@ public class PlayerInput : MonoBehaviour
         yield return new WaitForSeconds(lungeTime);
         movement.enabled = true;
         dissabledtimer = 0;
+        stateManager.IsLunging = false;
     }
 }
