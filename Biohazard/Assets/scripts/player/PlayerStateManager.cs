@@ -62,8 +62,8 @@ public class PlayerStateManager : MonoBehaviour
 
         if (Time.time > lastChomp + chompAttackCooldown)
         {
-            // anim goes here
-            //playerSprite.GetComponent<Animator>().Play("chomp", -1, 0f);
+                
+            playerSprite.GetComponent<Animator>().Play("mouth animation", -1, 0f);
 
             HitPoint(chompPoint.transform.position, 1.2f, 10);
 
