@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static UnityEditor.PlayerSettings;
@@ -11,7 +12,7 @@ public class PlayerStateManager : MonoBehaviour
     public static bool canAttack = false;
 
     public float shootCooldown = 1;
-
+    public float LungeTrailTimer = 0;
     public float chompAttackCooldown;
 
     public GameObject acidPoint;
@@ -36,6 +37,8 @@ public class PlayerStateManager : MonoBehaviour
 
     public float LungeCharge = 0;
     public bool IsLungeCharging = false;
+    public bool IsLunging = false;
+   
 
     Vector3 LungeDir;
 
@@ -43,6 +46,11 @@ public class PlayerStateManager : MonoBehaviour
     {
         ManageAcid();
         ManageLunge();
+        if (IsLunging == true) 
+        {
+            AcidLunge();
+        }
+        
     }
 
     public void Chomp()
@@ -54,8 +62,8 @@ public class PlayerStateManager : MonoBehaviour
 
         if (Time.time > lastChomp + chompAttackCooldown)
         {
-            // anim goes here
-            //playerSprite.GetComponent<Animator>().Play("chomp", -1, 0f);
+                
+            playerSprite.GetComponent<Animator>().Play("mouth animation", -1, 0f);
 
             HitPoint(chompPoint.transform.position, 1.2f, 10);
 
@@ -66,13 +74,22 @@ public class PlayerStateManager : MonoBehaviour
     public void HitPoint(Vector2 pos, float radius, float damage)
     {
         Collider2D hit = Physics2D.OverlapCircle(chompPoint.transform.position, radius);
-
-        Debug.Log("hit something");
-
-        if (hit.CompareTag("Enemy"))
+        if (hit != null)
         {
-            hit.GetComponentInParent<Dummy>().TakeDamage(damage);
-            Debug.Log("hit enemy");
+            if (!hit.CompareTag("Player"))
+            {
+                Debug.Log("hit something");
+            }
+
+            if (hit.CompareTag("Enemy"))
+            {
+                hit.GetComponentInParent<Dummy>().TakeDamage(damage);
+                Debug.Log("hit enemy");
+                if (IsLunging)
+                {
+                    Debug.Log("hit enemy while lunging");
+                }
+            }
         }
     }
 
@@ -115,8 +132,22 @@ public class PlayerStateManager : MonoBehaviour
 
     public void LungeAttack()
     {
-        HitPoint(LungePoint.transform.position, 4, 10);
+        IsLunging = true;
         Rigidbody2D.velocity = transform.right * LungeCharge;
+    }
+
+    public void AcidLunge()
+    {
+        if (IsLunging == true)
+        {
+            LungeTrailTimer += Time.deltaTime;
+            if (LungeTrailTimer >= 0.3f)
+            {
+             SpawnTrailPuddle();
+             HitPoint(LungePoint.transform.position, 4, 20);
+                LungeTrailTimer = 0f;
+            }
+        }
     }
 
     void ManageAcid()
@@ -133,9 +164,16 @@ public class PlayerStateManager : MonoBehaviour
         if (!acidPuddle)
         {
             GameObject newAcidPuddle = Instantiate(acidPuddlePrefab, projectiles.transform);
-            newAcidPuddle.transform.position = acidPuddleSpawnPoint;
+            newAcidPuddle.transform.position = acidPoint.transform.position;
 
             acidPuddle = newAcidPuddle;
         }
+    }
+    public void SpawnTrailPuddle()
+    {
+        GameObject newAcidPuddle = Instantiate(acidPuddlePrefab, projectiles.transform);
+        newAcidPuddle.transform.position = LungePoint.transform.position;
+
+        acidPuddle = newAcidPuddle;
     }
 }

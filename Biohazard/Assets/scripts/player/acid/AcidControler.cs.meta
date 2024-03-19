@@ -3,7 +3,10 @@ guid: ecc09f128bd72e64fa69ecffb96a3c83
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - stateManager: {instanceID: 0}
+  - rigidbody: {instanceID: 0}
+  - acidPoint: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
