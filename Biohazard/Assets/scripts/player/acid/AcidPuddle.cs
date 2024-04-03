@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class AcidPuddle : MonoBehaviour
 {
-    
+    Quaternion random_rotation;
+
+    private void Start()
+    {
+        int randomRotationNum = Random.Range(0, 360);
+        random_rotation = Quaternion.Euler(0f, 0f, randomRotationNum);
+    }
     private void Update()
     {
+        transform.rotation = Quaternion.Lerp(transform.rotation, random_rotation, Time.deltaTime);
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         
         if (spriteRenderer.color.a <= 1)
@@ -17,6 +25,7 @@ public class AcidPuddle : MonoBehaviour
         Collider2D hit = Physics2D.OverlapCircle(transform.position, 0.7f);
         if (hit && hit.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("Hit");
             hit.GetComponentInParent<Dummy>().TakeDamage(5);
         }
     }

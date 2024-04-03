@@ -11,12 +11,11 @@ TagManager:
   - TransparentFX
   - Ignore Raycast
   - Player
-  - Walls
   - Water
   - UI
+  - UI
   - Enemies
-  - 
-  - 
+  - Projectiles
   - 
   - 
   - 

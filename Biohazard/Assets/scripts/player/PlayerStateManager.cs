@@ -28,7 +28,11 @@ public class PlayerStateManager : MonoBehaviour
 
     public GameObject playerSprite;
 
+    public LayerMask wallMask;
+
+    public Sprite[] possibleAcidPuddleSprites;
     public Sprite[] possibleAcidSprites;
+
     Vector3 acidPuddleSpawnPoint;
     GameObject acidPuddle;
     public Rigidbody2D Rigidbody2D;
@@ -38,7 +42,6 @@ public class PlayerStateManager : MonoBehaviour
     public float LungeCharge = 0;
     public bool IsLungeCharging = false;
     public bool IsLunging = false;
-   
 
     Vector3 LungeDir;
 
@@ -50,7 +53,6 @@ public class PlayerStateManager : MonoBehaviour
         {
             AcidLunge();
         }
-        
     }
 
     public void Chomp()
@@ -95,20 +97,33 @@ public class PlayerStateManager : MonoBehaviour
 
     public void AcidAttack()
     {
+        var mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPos.z = 0f;
+
+        RaycastHit2D result = Physics2D.Raycast(transform.position, mouseWorldPos, 100f, wallMask.value);
+
         acidPuddle = null;
-        acidPuddleSpawnPoint = acidEndPoint.transform.position;
 
         for (int i = 0; i < Random.Range(7, 15); i++)
         {
             int spriteIndex = Random.Range(1, 3);
-
-            Vector3 randomPos = Random.insideUnitCircle * 1;
             
+            Vector3 randomPos = Random.insideUnitCircle * 1;
+            Debug.Log(possibleAcidSprites[spriteIndex]);
             GameObject newAcid = Instantiate(acidPrefab, projectiles.transform);
             newAcid.GetComponent<AcidController>().stateManager = GetComponent<PlayerStateManager>();
             newAcid.transform.position = acidPoint.transform.position;
             newAcid.GetComponent<AcidController>().direction = acidEndPoint.transform.position + new Vector3(randomPos.x, randomPos.y, 0);
             newAcid.GetComponent<SpriteRenderer>().sprite = possibleAcidSprites[spriteIndex];
+        }
+        
+        if (result)
+        {
+            SpawnAcidPuddle(result.point);
+        }
+        else
+        {
+            SpawnAcidPuddle(acidEndPoint.transform.position);
         }
     }
 
@@ -143,7 +158,7 @@ public class PlayerStateManager : MonoBehaviour
             LungeTrailTimer += Time.deltaTime;
             if (LungeTrailTimer >= 0.3f)
             {
-             SpawnTrailPuddle();
+             SpawnAcidPuddle(acidPoint.transform.position);
              HitPoint(LungePoint.transform.position, 4, 20);
                 LungeTrailTimer = 0f;
             }
@@ -159,21 +174,17 @@ public class PlayerStateManager : MonoBehaviour
         acidRadiusShape.SetActive(currentState == "vomitting");
     }
 
-    public void SpawnAcidPuddle()
+    public void SpawnAcidPuddle(Vector3 location)
     {
         if (!acidPuddle)
         {
+            int spriteIndex = Random.Range(1, 3);
+
             GameObject newAcidPuddle = Instantiate(acidPuddlePrefab, projectiles.transform);
-            newAcidPuddle.transform.position = acidPoint.transform.position;
+            newAcidPuddle.transform.position = location;
+            newAcidPuddle.GetComponent<SpriteRenderer>().sprite = possibleAcidPuddleSprites[spriteIndex];
 
             acidPuddle = newAcidPuddle;
         }
-    }
-    public void SpawnTrailPuddle()
-    {
-        GameObject newAcidPuddle = Instantiate(acidPuddlePrefab, projectiles.transform);
-        newAcidPuddle.transform.position = LungePoint.transform.position;
-
-        acidPuddle = newAcidPuddle;
     }
 }
