@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour
 
     public GameObject HeadStatic;
     public GameObject HeadAnim;
+    private Animator ChompAnim;
 
     string lastState = "idle";
 
@@ -26,6 +27,8 @@ public class PlayerInput : MonoBehaviour
             stateManager = player.GetComponent<PlayerStateManager>();
         }
         movement = GetComponent<PlayerMovement>();
+
+        ChompAnim = GetComponent<Animator>();
     }
 
     public float acidCooldown;
@@ -43,11 +46,20 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             HeadStatic.GetComponent<SpriteRenderer>().enabled = false;
+            
             GetComponent<PlayerStateManager>().Chomp();
         }
         else if (Input.GetKeyDown(KeyCode.Mouse1) && canUseAcid)
         {
             PlayerStateManager.currentState = "vomitting";
+        }
+
+        if (ChompAnim != null) 
+        { 
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+             ChompAnim.SetTrigger("ChompTrigger");
+            }
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse1))
