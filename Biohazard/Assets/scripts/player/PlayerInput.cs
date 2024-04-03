@@ -7,6 +7,9 @@ public class PlayerInput : MonoBehaviour
     PlayerMovement movement;
     PlayerStateManager stateManager;
 
+    public GameObject HeadStatic;
+    public GameObject HeadAnim;
+
     string lastState = "idle";
 
     private float lastAcidUse;
@@ -30,6 +33,8 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+
+        
         if (Time.time > lastAcidUse + acidCooldown)
         {
             canUseAcid = true;
@@ -37,6 +42,7 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            HeadStatic.GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<PlayerStateManager>().Chomp();
         }
         else if (Input.GetKeyDown(KeyCode.Mouse1) && canUseAcid)

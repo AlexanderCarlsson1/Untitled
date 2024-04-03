@@ -126,9 +126,9 @@ TextureImporter:
       name: mouth anim_14
       rect:
         serializedVersion: 2
-        x: 144
+        x: 143
         y: 126
-        width: 46
+        width: 47
         height: 36
       alignment: 4
       pivot: {x: 0, y: 0.5}
@@ -147,9 +147,9 @@ TextureImporter:
       name: mouth anim_15
       rect:
         serializedVersion: 2
-        x: 337
+        x: 336
         y: 126
-        width: 46
+        width: 47
         height: 36
       alignment: 4
       pivot: {x: 0, y: 0.5}
@@ -168,9 +168,9 @@ TextureImporter:
       name: mouth anim_16
       rect:
         serializedVersion: 2
-        x: 530
+        x: 529
         y: 126
-        width: 46
+        width: 47
         height: 36
       alignment: 4
       pivot: {x: 0, y: 0.5}
@@ -189,9 +189,9 @@ TextureImporter:
       name: mouth anim_17
       rect:
         serializedVersion: 2
-        x: 723
+        x: 722
         y: 126
-        width: 46
+        width: 47
         height: 36
       alignment: 4
       pivot: {x: 0, y: 0.5}
@@ -210,9 +210,9 @@ TextureImporter:
       name: mouth anim_18
       rect:
         serializedVersion: 2
-        x: 916
+        x: 915
         y: 126
-        width: 46
+        width: 47
         height: 36
       alignment: 4
       pivot: {x: 0, y: 0.5}
@@ -231,9 +231,9 @@ TextureImporter:
       name: mouth anim_19
       rect:
         serializedVersion: 2
-        x: 1109
+        x: 1108
         y: 126
-        width: 46
+        width: 47
         height: 36
       alignment: 4
       pivot: {x: 0, y: 0.5}
@@ -252,9 +252,9 @@ TextureImporter:
       name: mouth anim_20
       rect:
         serializedVersion: 2
-        x: 1302
+        x: 1301
         y: 126
-        width: 46
+        width: 47
         height: 36
       alignment: 4
       pivot: {x: 0, y: 0.5}
@@ -273,9 +273,9 @@ TextureImporter:
       name: mouth anim_26
       rect:
         serializedVersion: 2
-        x: 144
+        x: 143
         y: 30
-        width: 46
+        width: 47
         height: 37
       alignment: 4
       pivot: {x: 0, y: 0.5}
@@ -294,9 +294,9 @@ TextureImporter:
       name: mouth anim_27
       rect:
         serializedVersion: 2
-        x: 337
+        x: 336
         y: 29
-        width: 46
+        width: 47
         height: 40
       alignment: 4
       pivot: {x: 0, y: 0.5}
