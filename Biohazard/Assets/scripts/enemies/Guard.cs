@@ -51,6 +51,9 @@ public class Guard : MonoBehaviour
     {
         if (Time.time > lastShot + shootCooldown && destionationSetter.target)
         {
+            if (!CheckSight(transform))
+                return;
+
             GameObject newBullet = Instantiate(bullet, projectilesContainer.transform);
             newBullet.transform.position = transform.position;
             newBullet.transform.rotation = transform.rotation;
@@ -72,17 +75,24 @@ public class Guard : MonoBehaviour
         }
     }
 
-    void CheckSight(Transform trans)
+    bool CheckSight(Transform trans)
     {
-        RaycastHit2D result = Physics2D.Raycast(transform.position, trans.position, 100f, wallMask.value);
+        if (destionationSetter.target == null)
+            return false;
+
+        Vector3 targetPos = destionationSetter.target.transform.position;
+
+        RaycastHit2D result = Physics2D.Raycast(transform.position, targetPos, 100f, wallMask.value);
 
         if (result)
         {
             destionationSetter.target = null;
             searching = false;
 
-            return;
+            return false;
         }
+
+        return true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -100,5 +110,14 @@ public class Guard : MonoBehaviour
         {
             searching = false;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        AcidController data = collision.gameObject.GetComponent<AcidController>();
+        if (!collision.transform.CompareTag("Projectile") || !data)
+            return;
+
+        transform.GetComponent<Dummy>().TakeDamage(data.damage);
     }
 }
