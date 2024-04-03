@@ -36,15 +36,9 @@ public class AcidController : MonoBehaviour
         rigidbody.position = Vector3.Lerp(transform.position, direction, randomSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, random_rotation, Time.deltaTime);
 
-        spriteRenderer.color -= new Color(0, 0, 0, 0.1f * Time.deltaTime);
-
-        if (spriteRenderer.color.a <= 0)
+        if (spriteRenderer.color.a > 0.8f)
         {
-            Destroy(gameObject);
-        }
-        else if (spriteRenderer.color.a <= 0.5f)
-        {
-            stateManager.SpawnAcidPuddle();
+            spriteRenderer.color -= new Color(0, 0, 0, 0.1f * Time.deltaTime);
         }
     }
 
