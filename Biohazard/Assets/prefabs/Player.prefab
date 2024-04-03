@@ -496,6 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootCooldown: 1
+  LungeTrailTimer: 0
   chompAttackCooldown: 0.5
   acidPoint: {fileID: 1861501398765580937}
   acidRadiusShape: {fileID: 3630538207875832154}
@@ -506,6 +507,13 @@ MonoBehaviour:
   chompPoint: {fileID: 1592087985724080651}
   LungePoint: {fileID: 6637191583248624571}
   playerSprite: {fileID: 8371185061304693247}
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 0
+  possibleAcidPuddleSprites:
+  - {fileID: 21300000, guid: 540143435737e9f42bd44316b98e07d8, type: 3}
+  - {fileID: 21300000, guid: 00581de8e361d6a4cb33b4514aebe1a3, type: 3}
+  - {fileID: 21300000, guid: 8ec969e67946cbf4cb8a7d2378d1fd2e, type: 3}
   possibleAcidSprites:
   - {fileID: 21300000, guid: d875674c3c54b454da8192968acc9893, type: 3}
   - {fileID: 21300000, guid: 3ab7e4fd265ea0e439dde96a265a0f07, type: 3}
@@ -513,6 +521,7 @@ MonoBehaviour:
   Rigidbody2D: {fileID: 1013289665760486993}
   LungeCharge: 0
   IsLungeCharging: 0
+  IsLunging: 0
 --- !u!114 &2181188971426070449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,7 +534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b9f44301c0e7d409df6442dd781b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dissabledtimer: 0
   acidCooldown: 2
 --- !u!70 &3693894882775274230
 CapsuleCollider2D:

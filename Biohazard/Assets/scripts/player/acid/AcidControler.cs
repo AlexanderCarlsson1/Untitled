@@ -15,7 +15,10 @@ public class AcidController : MonoBehaviour
 
     Quaternion random_rotation;
 
+    public float damage = 5;
     float randomSpeed;
+
+    bool hitSomething = false;
 
     private void Start()
     {
@@ -33,8 +36,11 @@ public class AcidController : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
-        rigidbody.position = Vector3.Lerp(transform.position, direction, randomSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, random_rotation, Time.deltaTime);
+        if (!hitSomething)
+        {
+            rigidbody.position = Vector3.Lerp(transform.position, direction, randomSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, random_rotation, Time.deltaTime);
+        }
 
         if (spriteRenderer.color.a > 0.8f)
         {
@@ -44,9 +50,9 @@ public class AcidController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Wall"))
         {
-            collision.GetComponent<Dummy>().TakeDamage(5);
+            hitSomething = true;
         }
     }
 }

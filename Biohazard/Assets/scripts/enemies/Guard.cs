@@ -111,4 +111,13 @@ public class Guard : MonoBehaviour
             searching = false;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        AcidController data = collision.gameObject.GetComponent<AcidController>();
+        if (!collision.transform.CompareTag("Projectile") || !data)
+            return;
+
+        transform.GetComponent<Dummy>().TakeDamage(data.damage);
+    }
 }

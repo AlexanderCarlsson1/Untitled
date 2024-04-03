@@ -791,6 +791,10 @@ PrefabInstance:
       propertyPath: projectiles
       value: 
       objectReference: {fileID: 1315532321}
+    - target: {fileID: 1470096481087754433, guid: 846943fdf046cb449ae791dcef2b86ee, type: 3}
+      propertyPath: wallMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3730118973972330402, guid: 846943fdf046cb449ae791dcef2b86ee, type: 3}
       propertyPath: m_Name
       value: Player
