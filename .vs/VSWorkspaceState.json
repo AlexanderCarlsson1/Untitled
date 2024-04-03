@@ -3,8 +3,9 @@
     "",
     "\\Biohazard",
     "\\Biohazard\\Assets",
-    "\\Biohazard\\Assets\\scripts"
+    "\\Biohazard\\Assets\\scripts",
+    "\\Biohazard\\Assets\\scripts\\player"
   ],
-  "SelectedNode": "\\Biohazard\\Assets\\scripts\\player",
+  "SelectedNode": "\\Biohazard\\Assets\\scripts\\player\\PlayerStateManager.cs",
   "PreviewInSolutionExplorer": false
 }
