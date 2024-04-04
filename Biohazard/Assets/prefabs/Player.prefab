@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 7380313695632180204}
   - component: {fileID: 5421857367022545673}
   - component: {fileID: 1728380326171727247}
+  - component: {fileID: 4623358606453418119}
   m_Layer: 0
   m_Name: mouth anim_14
   m_TagString: Untagged
@@ -369,6 +370,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4623358606453418119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345988363631056861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb20f4bbc9ef8724789cafc2ea842a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadStatic: {fileID: 3931506976121820838}
+  HeadAnim: {fileID: 2345988363631056861}
 --- !u!1 &2831032185576008115
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,8 +800,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b9f44301c0e7d409df6442dd781b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HeadStatic: {fileID: 3931506976121820838}
-  HeadAnim: {fileID: 2345988363631056861}
   acidCooldown: 2
 --- !u!60 &4186154403801156747
 PolygonCollider2D:
