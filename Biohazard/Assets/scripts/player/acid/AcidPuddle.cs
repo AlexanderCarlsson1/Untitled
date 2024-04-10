@@ -17,7 +17,7 @@ public class AcidPuddle : MonoBehaviour
 
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         
-        if (spriteRenderer.color.a <= 1)
+        if (spriteRenderer.color.a <= 0.8)
         {
             spriteRenderer.color += new Color(0, 0, 0, 0.1f * Time.deltaTime);
         }
