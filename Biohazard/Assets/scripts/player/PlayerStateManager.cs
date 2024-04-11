@@ -83,12 +83,22 @@ public class PlayerStateManager : MonoBehaviour
 
             if (hit.CompareTag("Enemy"))
             {
-                hit.GetComponentInParent<Dummy>().TakeDamage(damage);
+                hit.GetComponentInParent<EnemyClass>().TakeDamage(damage);
                 Debug.Log("hit enemy");
                 if (IsLunging)
                 {
                     Debug.Log("hit enemy while lunging");
                 }
+            }
+
+            DoorComponent doorComp = hit.GetComponent<DoorComponent>();
+
+            if (hit.CompareTag("Door") && doorComp)
+            {
+                if (doorComp.doorLevel > 1)
+                    return;
+
+                doorComp.HitDoor();
             }
         }
     }
