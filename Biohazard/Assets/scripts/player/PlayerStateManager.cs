@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using static UnityEditor.PlayerSettings;
 
 public class PlayerStateManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class PlayerStateManager : MonoBehaviour
     public static string currentState = "idle";
 
     public static bool canAttack = false;
+
+    private int lives = 3;
 
     public float shootCooldown = 1;
     public float LungeTrailTimer = 0;
@@ -52,6 +55,16 @@ public class PlayerStateManager : MonoBehaviour
         if (IsLunging == true) 
         {
             AcidLunge();
+        }
+    }
+
+    public void TakeLife(int livesTaken)
+    {
+        lives -= livesTaken;
+        Debug.Log(lives);
+        if (lives <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
