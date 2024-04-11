@@ -54,5 +54,14 @@ public class AcidController : MonoBehaviour
         {
             hitSomething = true;
         }
+
+        DoorComponent doorComp = collision.GetComponent<DoorComponent>();
+
+        if (collision.CompareTag("Door") && doorComp)
+        {
+            hitSomething = true;
+
+            doorComp.HitDoor();
+        }
     }
 }
