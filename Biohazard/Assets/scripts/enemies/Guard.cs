@@ -118,6 +118,6 @@ public class Guard : MonoBehaviour
         if (!collision.transform.CompareTag("Projectile") || !data)
             return;
 
-        transform.GetComponent<Dummy>().TakeDamage(data.damage);
+        transform.GetComponent<EnemyClass>().TakeDamage(data.damage);
     }
 }
