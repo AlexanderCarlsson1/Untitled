@@ -12,16 +12,4 @@ public class Bullet : MonoBehaviour
     {
         transform.position += transform.right * Time.deltaTime * speed;
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        PlayerStateManager stateManager = collision.GetComponent<PlayerStateManager>();
-
-        if (collision.CompareTag("Player") && stateManager)
-        {
-            stateManager.TakeLife(1);
-
-            Destroy(gameObject);
-        }
-    }
 }

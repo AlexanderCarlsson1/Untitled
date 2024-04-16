@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
 using static UnityEditor.PlayerSettings;
 
 public class PlayerStateManager : MonoBehaviour
@@ -11,8 +10,6 @@ public class PlayerStateManager : MonoBehaviour
     public static string currentState = "idle";
 
     public static bool canAttack = false;
-
-    private int lives = 3;
 
     public float shootCooldown = 1;
     public float LungeTrailTimer = 0;
@@ -58,16 +55,6 @@ public class PlayerStateManager : MonoBehaviour
         }
     }
 
-    public void TakeLife(int livesTaken)
-    {
-        lives -= livesTaken;
-        Debug.Log(lives);
-        if (lives <= 0)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
-
     public void Chomp()
     {
         if (currentState == "vomitting")
@@ -96,22 +83,12 @@ public class PlayerStateManager : MonoBehaviour
 
             if (hit.CompareTag("Enemy"))
             {
-                hit.GetComponentInParent<EnemyClass>().TakeDamage(damage);
+                hit.GetComponentInParent<Dummy>().TakeDamage(damage);
                 Debug.Log("hit enemy");
                 if (IsLunging)
                 {
                     Debug.Log("hit enemy while lunging");
                 }
-            }
-
-            DoorComponent doorComp = hit.GetComponent<DoorComponent>();
-
-            if (hit.CompareTag("Door") && doorComp)
-            {
-                if (doorComp.doorLevel > 1)
-                    return;
-
-                doorComp.HitDoor();
             }
         }
     }
