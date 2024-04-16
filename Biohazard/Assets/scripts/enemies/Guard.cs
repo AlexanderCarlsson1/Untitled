@@ -97,6 +97,7 @@ public class Guard : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision);
         if (collision.CompareTag("Player"))
         {
             destionationSetter.target = collision.transform;
@@ -118,6 +119,6 @@ public class Guard : MonoBehaviour
         if (!collision.transform.CompareTag("Projectile") || !data)
             return;
 
-        transform.GetComponent<Dummy>().TakeDamage(data.damage);
+        transform.GetComponent<EnemyClass>().TakeDamage(data.damage);
     }
 }
