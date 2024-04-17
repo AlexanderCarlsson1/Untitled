@@ -25,7 +25,7 @@ public class AcidPuddle : MonoBehaviour
         Collider2D hit = Physics2D.OverlapCircle(transform.position, 0.7f);
         if (hit && hit.gameObject.CompareTag("Enemy"))
         {
-            hit.GetComponentInParent<EnemyClass>().TakeDamage(5);
+            hit.GetComponentInParent<HealthComponent>().TakeDamage(5);
         }
     }
 }

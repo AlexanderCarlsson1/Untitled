@@ -78,7 +78,7 @@ public class PlayerStateManager : MonoBehaviour
         if (Time.time > lastChomp + chompAttackCooldown)
         {
                 
-            HitPoint(chompPoint.transform.position, 1.2f, 10);
+            HitPoint(chompPoint.transform.position, 1.2f, 1);
 
             lastChomp = Time.time;
         }
@@ -96,7 +96,7 @@ public class PlayerStateManager : MonoBehaviour
 
             if (hit.CompareTag("Enemy"))
             {
-                hit.GetComponentInParent<EnemyClass>().TakeDamage(damage);
+                hit.GetComponentInParent<HealthComponent>().TakeDamage(damage);
                 Debug.Log("hit enemy");
                 if (IsLunging)
                 {
